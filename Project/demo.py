@@ -8,8 +8,8 @@ import xgboost
 import cProfile
 import os
 
-path_data=os.path.join(os.getcwd(),"sample.csv")
-df_eda=pd.read_csv("path_data")
+os.chdir(r"/mount/src/zomato/project")
+df_eda=pd.read_csv("sample.csv")
 #layout
 st.set_page_config(page_title="Zomato Analysis",layout="wide")
 

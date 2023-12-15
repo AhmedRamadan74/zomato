@@ -6,8 +6,10 @@ import sklearn
 import plotly.express as px
 import xgboost
 import cProfile
+import os
 def main():
-    df_eda=pd.read_csv("sample.csv")
+    path_data=os.path.join(os.getcwd(),"sample.csv")
+    df_eda=pd.read_csv("path_data")
     #layout
     st.set_page_config(page_title="Zomato Analysis",layout="wide")
 

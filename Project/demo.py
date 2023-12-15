@@ -67,7 +67,7 @@ if pages=="Data":
                 |listed_in(city)	|city of restaurant
                                                         ''')
     st.subheader("Display first 10 rows : ")
-    st.dataframe(zomato.head(10))
+    st.dataframe(df_eda.head(10))
 if pages=="Analysis":
 
     row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))

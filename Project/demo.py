@@ -7,9 +7,7 @@ import plotly.express as px
 import xgboost
 import cProfile
 def main():
-    df_eda=pd.read_csv("data.csv")
-    zomato=pd.read_csv("zomato.csv")
-
+    df_eda=pd.read_csv("sample.csv")
     #layout
     st.set_page_config(page_title="Zomato Analysis",layout="wide")
 

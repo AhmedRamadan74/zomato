@@ -46,8 +46,6 @@ if pages=="Data":
     st.write('''
                 | Attribute | Description |
                 |----------|----------|
-                |url	|Url of restaurant
-                |address	|Address of restaurant
                 |name	|Name's restaurant
                 |online_order |The customer can book an order online or not 
                 |book_table	|The customer can book a table or not
@@ -59,7 +57,6 @@ if pages=="Data":
                 |dish_liked	|The type of dish provided by the restaurant
                 |cuisines	|The type of cuisines provided by the restaurant
                 |approx_cost(for two people)		|approx cost for two people
-                |reviews_list	|the list has content reviews of the restaurant
                 |menu_item	|the list has content menu of the restaurant
                 |listed_in(type)		|The type of service provided by the restaurant
                 |reviews_list	|list contents reviews of restaurant

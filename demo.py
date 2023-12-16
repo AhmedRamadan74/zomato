@@ -77,7 +77,8 @@ if pages=="Analysis":
                         This app is created to analyze the data of a resturants in zomato website to predict if your resturant will be successful or not </center> </h6> ''', unsafe_allow_html=True)
     with row0_2:
         st.text("")
-        st.subheader('App by [Ahmed Ramadan](https://www.linkedin.com/in/ahmed-ramadan-18b873230/)')
+        st.subheader('Linkedin : App by [Ahmed Ramadan](https://www.linkedin.com/in/ahmed-ramadan-18b873230/) ')
+        st.subheader('Github : App by [Ahmed Ramadan](https://github.com/AhmedRamadan74/zomato)')
     # Dividing our analysis into tabs, each tab contains
     over_view,Influencing_factors,tab_conclusion = st.tabs(['Over View',"Influencing factors",'Conclusion'])
     with over_view:
@@ -235,15 +236,23 @@ if pages=="Analysis":
         st.write("7) you have to service provided will be Delivery or Dine-out")
 
 if pages=="Predict state your restaurant":
-    #st.header("You will be restaurant and you want to know if your restaurant will be succesfull or not. ")
-    #st.header("Click [predict your resturant state](https://zomato-prediction.streamlit.app/) ")
+    
+    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((.1, 2.3, .1, 1.3, .1))
+
+    with row0_1:
+        st.title('Prediction your resturant')
+        st.markdown(''' <h6>
+                        You will be open your restaurant and you want to know if your restaurant will be succesfull or not.  </center> </h6> ''', unsafe_allow_html=True)
+    with row0_2:
+        st.text("")
+        st.subheader('Linkedin : App by [Ahmed Ramadan](https://www.linkedin.com/in/ahmed-ramadan-18b873230/) ')
+        st.subheader('Github : App by [Ahmed Ramadan](https://github.com/AhmedRamadan74/zomato)')
     list1=df_eda["location"].unique().tolist()
     list2=df_eda["rest_type"].unique().tolist()
     list3=df_eda["cuisines"].unique().tolist()
     list4=df_eda["listed_in(type)"].unique().tolist()
     list5=df_eda["listed_in(city)"].unique().tolist()
     model=pickle.load(open("model", 'rb')) #load model
-    st.header("You will be open your restaurant and you want to know if your restaurant will be succesfull or not. ")
     st.write("Frist , entry some inforamtion for your restaurant ")
     online_order=st.selectbox("The customer can book an order online or not :",['Yes', 'No'])
     book_table=st.selectbox("The customer can book a table or not :",['Yes', 'No'])

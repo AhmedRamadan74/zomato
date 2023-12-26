@@ -5,7 +5,7 @@ import numpy as np
 import sklearn
 import plotly.express as px
 import xgboost
-import cProfile
+import joblib
 
 df_eda=pd.read_csv("sample.csv")
 
@@ -244,12 +244,35 @@ if pages=="Predict state your restaurant":
         st.text("")
         st.subheader('Linkedin : App by [Ahmed Ramadan](https://www.linkedin.com/in/ahmed-ramadan-18b873230/) ')
         st.subheader('Github : App by [Ahmed Ramadan](https://github.com/AhmedRamadan74/zomato)')
+
+    model=joblib.load("model.pkl") #load model
+    inputs=joblib.load("input.pkl") #load input
+
+    def Make_Prediction(online_order,book_table,phone,location,rest_type,cuisines,approx_cost,menu_item,listed_in_type,listed_in_city):
+        df_pred = pd.DataFrame(columns=inputs)
+        df_pred.at[0,"online_order"] = online_order
+        df_pred.at[0,"book_table"] = book_table
+        df_pred.at[0,"phone"] = phone
+        df_pred.at[0,"location"] = location
+        df_pred.at[0,"rest_type"] = rest_type
+        df_pred.at[0,"cuisines"] = cuisines
+        df_pred.at[0,"approx_cost(for two people)"] = approx_cost
+        df_pred.at[0,"menu_item"] = menu_item
+        df_pred.at[0,"listed_in(type)"] = listed_in_type
+        df_pred.at[0,"listed_in(city)"] = listed_in_city
+        #prediction output
+        result = model.predict(df_pred)
+        if result[0] ==1:
+            return "This restaurant will be successful"
+        else:
+            return "This restaurant will be not successful"
+    
     list1=df_eda["location"].unique().tolist()
     list2=df_eda["rest_type"].unique().tolist()
     list3=df_eda["cuisines"].unique().tolist()
     list4=df_eda["listed_in(type)"].unique().tolist()
     list5=df_eda["listed_in(city)"].unique().tolist()
-    model=pickle.load(open("model", 'rb')) #load model
+
     st.write("Frist , entry some inforamtion for your restaurant ")
     online_order=st.selectbox("The customer can book an order online or not :",['Yes', 'No'])
     book_table=st.selectbox("The customer can book a table or not :",['Yes', 'No'])
@@ -261,26 +284,11 @@ if pages=="Predict state your restaurant":
     menu_item=st.selectbox("The resturant have menu or not :",['have menu', 'not have menu'])
     listed_in_type=st.selectbox("The type of service provided by the restaurant :",list4)
     listed_in_city=st.selectbox("City of a resturant :",list5)
-    data={'online_order': online_order,
-            'book_table': book_table,
-            'phone':phone,
-            'location':location,
-            'rest_type':rest_type,
-            'cuisines':cuisines,
-            'approx_cost(for two people)':approx_cost,
-            'menu_item':menu_item,
-            'listed_in(type)':listed_in_type,
-            'listed_in(city)':listed_in_city}
-    df_test=pd.DataFrame(data,index=[0])
-    #function predict
-    def prediction(df):
-        value_predict=model.predict(df)[0]
-        if value_predict ==1:
-            return "This restaurant will be successful"
-        else:
-            return "This restaurant will be not successful"
 
     #show the result
     btn=st.button("Predict")
     if btn:
-        st.write(prediction(df_test))
+        st.write(Make_Prediction(online_order,book_table,phone
+                                 ,location,rest_type,cuisines,
+                                 approx_cost,menu_item,
+                                 listed_in_type,listed_in_city))
